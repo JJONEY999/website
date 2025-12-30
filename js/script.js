@@ -233,56 +233,50 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(move, slideDelay);
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const rightTrack = document.querySelector('#main-left .horizontal');
+  if (!rightTrack) return;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.querySelector("#main-left .horizontal");
-  if (!track) return;
+  const slideDelay = 2000;
+  const transition = 'transform 1.2s ease-in-out';
 
-  const slideWidth = 978;
-  const speed = "transform 1.2s cubic-bezier(0.25, 1, 0.5, 1)";
-  let index = 1;
+  // ✅ 한 장 이동 단위(이미지 509 + 간격 84 = 593)
+  const step = 978;
 
-  // 원본들
-  let slides = Array.from(track.querySelectorAll("img"));
+  const imgs = Array.from(rightTrack.querySelectorAll('img'));
 
-  // 앞/뒤 복제
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone  = slides[slides.length - 1].cloneNode(true);
+  // ✅ 첫번째 복제(무한루프용)
+  const firstClone = imgs[0].cloneNode(true);
+  rightTrack.appendChild(firstClone);
 
-  track.appendChild(firstClone);
-  track.prepend(lastClone);
+  let idx = 0;
+  let lock = false;
 
-  // 다시 갱신
-  slides = Array.from(track.querySelectorAll("img"));
+  function move() {
+    if (lock) return;
+    lock = true;
 
-  // 시작 위치: 1번(진짜 첫 슬라이드)
-  track.style.transition = "none";
-  track.style.transform = `translateX(-${slideWidth * index}px)`;
+    idx++;
+    rightTrack.style.transition = transition;
+    rightTrack.style.transform = `translateX(-${idx * step}px)`;
 
-  function move(dir) {
-    index += dir;
-    track.style.transition = speed;
-    track.style.transform = `translateX(-${slideWidth * index}px)`;
-
-    track.addEventListener("transitionend", reset, { once: true });
-  }
-
-  function reset() {
-    // 끝(복제 첫) 도착 -> 진짜 첫로 점프
-    if (index === slides.length - 1) {
-      index = 1;
-      track.style.transition = "none";
-      track.style.transform = `translateX(-${slideWidth * index}px)`;
-    }
-    // 처음(복제 마지막) 도착 -> 진짜 마지막으로 점프
-    if (index === 0) {
-      index = slides.length - 2;
-      track.style.transition = "none";
-      track.style.transform = `translateX(-${slideWidth * index}px)`;
+    // ✅ 마지막(복제)까지 가면 transition 끝난 뒤 0으로 순간이동
+    if (idx === imgs.length) {
+      rightTrack.addEventListener('transitionend', function reset() {
+        rightTrack.removeEventListener('transitionend', reset);
+        rightTrack.style.transition = 'none';
+        rightTrack.style.transform = 'translateX(0)';
+        idx = 0;
+        lock = false;
+      }, { once: true });
+    } else {
+      rightTrack.addEventListener('transitionend', () => {
+        lock = false;
+      }, { once: true });
     }
   }
 
-  setInterval(() => move(1), 4000);
+  setInterval(move, slideDelay);
 });
 
 
@@ -438,4 +432,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 실행
     startAutoPlay();
+
 });
