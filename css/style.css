@@ -1,0 +1,1188 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#wrap {
+    width: 1920px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* ===== HEADER ===== */
+
+header {
+    width: 1920px;
+    height: 900px;
+    padding-top: 139px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 상단 고정 영역 */
+#header-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    z-index: 1000;
+}
+
+.header-inner {
+    width: 1920px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 120px;
+    /* 로고 ↔ 메뉴 ↔ 아이콘 간격 */
+}
+
+/* ===== MENU ===== */
+
+.menu {
+    width: 589px;
+    position: relative;
+}
+
+.menu>ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.menu>ul>li {
+    position: relative;
+    font-size: 16px;
+    padding-bottom: 6px;
+}
+
+.menu>ul>li>a {
+    display: block;
+    padding: 4px 0;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.menu>ul>li:hover>a {
+    opacity: 1;
+    color: #db9a9a;
+}
+
+/* 메뉴 hover 시 서브메뉴 열기 */
+.menu>ul>li:hover .submenu {
+    height: auto;
+    padding: 10px 0;
+}
+
+/* underline */
+.menu-underline {
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background-color: #db9a9a;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.menu>ul>li:hover .menu-underline {
+    width: 100%;
+    opacity: 1;
+}
+
+/* submenu */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    background-color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.4s ease;
+    z-index: 1100;
+}
+
+.submenu li a {
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.submenu li a:hover {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+/* 아이콘 */
+.menu-icon {
+    flex-shrink: 0;
+}
+
+.menu-icon img {
+    margin-left: 20px;
+}
+
+/* ===== MAIN VISUAL ===== */
+
+.main-box-wrap {
+    position: relative;
+    width: 1818px;
+    height: 721px;
+    display: flex;
+    gap: 0;
+    z-index: 1;
+}
+
+/* 공통 박스 */
+.box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+}
+
+/* LEFT */
+.box.left {
+    background-color: #F9EDE0;
+    width: 978px;
+    height: 721px;
+    align-items: flex-end;
+    /* 이미지 하단 정렬 */
+}
+
+/* RIGHT */
+.box.right {
+    background-color: #FCF6EF;
+    width: 840px;
+    height: 593px;
+    margin-top: 70px;
+    align-items: flex-start;
+    /* 이미지 하단 정렬 */
+}
+
+/* 이미지 */
+.box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+
+}
+
+/* 타이틀 */
+.box-title1 {
+    position: absolute;
+    margin-bottom: 620px;
+    right: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid black;
+    z-index: 2;
+}
+
+.box-title1:hover {
+    color: #db9a9a;
+    border-bottom: 2px solid #db9a9a;
+}
+
+.box-title2 {
+    position: absolute;
+    margin-top: 510px;
+    left: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid black;
+    z-index: 2;
+}
+
+.box-title2:hover {
+    color: #db9a9a;
+    border-bottom: 2px solid #db9a9a;
+}
+
+/* ===============================
+    PAGE IN ANIMATION (ON LOAD)
+================================ */
+
+/* 공통 */
+.box img {
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* LEFT : 왼쪽 → 오른쪽 */
+.box.left img {
+    transform: translateX(-80px);
+    animation: slideInLeft 1.2s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+/* RIGHT : 아래 → 위 */
+.box.right img {
+    transform: translateY(80px);
+    animation: slideInUp 1.2s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+/* KEYFRAMES */
+@keyframes slideInLeft {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===============================
+    MAIN VISUAL SLIDER
+================================ */
+
+.main-slider-wrap {
+    display: flex;
+    align-items: flex-start;
+}
+
+.box {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+/* LEFT: 978x721 박스 내에 978x651 이미지가 하단 고정됨 */
+/* LEFT 박스 영역 */
+.box.left {
+    width: 978px;
+    height: 721px;
+    background-color: #F9EDE0;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 트랙: 가로로 길게 배치 */
+.horizontal {
+    display: flex;
+    /* 처음에 가장 마지막 이미지(3번)가 보이도록 시작점을 뒤로 잡을 수도 있지만, 
+       JS에서 0, 1, 2 인덱스를 역으로 계산하는게 더 정확합니다. */
+    transform: translateX(0);
+}
+
+.horizontal img {
+    width: 978px;
+    height: 651px;
+    margin-top: 70px;
+    object-fit: none;
+    flex-shrink: 0;
+}
+
+/* RIGHT: 840x593 박스 내에 840x509 이미지가 상단 고정됨 */
+/* RIGHT 박스 설정 */
+.box.right {
+    width: 840px;
+    height: 593px;
+    /* 박스 전체 높이 (이미지 509 + 여백 84) */
+    background-color: #FCF6EF;
+    margin-top: 70px;
+    /* 왼쪽 이미지와 수평 정렬 */
+    display: flex;
+    align-items: flex-start;
+    /* [핵심] 자식인 트랙을 상단에 고정 */
+    overflow: hidden;
+}
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.vertical img {
+    width: 840px;
+    height: 509px;
+    /* [중요] 이미지 자체 높이만 설정 */
+    object-fit: cover;
+    /* 이미지가 꽉 차게 */
+    flex-shrink: 0;
+    /* [핵심] 이미지 아래에 84px 여백을 강제로 삽입 */
+    margin-bottom: 84px;
+}
+
+/* 트랙의 너비를 충분히 확보해야 이미지가 가로로 나열됩니다 */
+.step-track.horizontal {
+    display: flex; /* 이미지를 가로로 배치 */
+    width: fit-content; 
+    height: 100%;
+}
+
+.step-track.vertical {
+    display: flex;
+    flex-direction: column; /* 세로 슬라이드일 경우 (Right 용) */
+    width: 100%;
+    height: fit-content;
+}
+
+/* 이미지 크기 고정 */
+.box.left .step-track img {
+    width: 978px; /* slideWidth와 동일하게 고정 */
+    flex-shrink: 0;
+}
+
+.box.right .step-track img {
+    width: 840px;
+    flex-shrink: 0;
+}
+
+/* 텍스트 위치: 이미지 상단에 안정적으로 배치 */
+.box-title1 {
+    position: absolute;
+    top: 80px;
+    right: 40px;
+    z-index: 10;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+}
+
+.box-title2 {
+    position: absolute;
+    bottom: 50px;
+    left: 40px;
+    z-index: 10;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+}
+
+/* Section 1 전체 높이 및 중앙 정렬 */
+/* 기본 섹션 설정 */
+/* Section 1 전체 설정 */
+.section_1 {
+    width: 1920px;
+    height: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 상하 중앙 정렬 */
+}
+
+.section_1_inner {
+    width: 1328px;
+    /* 901px + 41px + 386px */
+}
+
+/* 타이틀 스타일 */
+.section_title {
+    margin-bottom: 30px;
+}
+
+.section_title .main-t {
+    font-size: 40px;
+    font-weight: 800;
+    margin-right: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+.section_title .sub-t {
+    font-size: 20px;
+    color: #333;
+    font-weight: 400;
+}
+
+/* 레이아웃: 좌측 큰 이미지 | 우측 세로 이미지 2개 */
+.exhibitions-wrapper {
+    display: flex;
+    gap: 41px;
+    align-items: flex-start;
+}
+
+/* 왼쪽 메인 배너 (901x601) */
+/* 부모 박스: 기준점이 됨 */
+.banner-1 {
+    position: relative;
+    /* 자식인 .floating-intro가 이 박스를 기준으로 움직임 */
+    width: 901px;
+    height: 601px;
+    overflow: hidden;
+}
+
+/* 오른쪽 상단 플로팅 문구 */
+.floating-intro {
+    position: absolute;
+    top: 23px;
+    /* 위에서 23px */
+    right: 33px;
+    /* 오른쪽에서 23px */
+    font-size: 22px;
+
+    color: #333;
+    /* 색상은 이미지에 맞춰 조정하세요 */
+    z-index: 10;
+    /* 이미지보다 위에 보이도록 설정 */
+    font-weight: 400;
+}
+
+/* (참고) 이미지 꽉 채우기 확인 */
+.banner-1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 오른쪽 서브 배너들 정렬 */
+.side-banners {
+    display: flex;
+    flex-direction: column;
+    gap: 47px;
+    /* 이미지 간 간격 */
+}
+
+/* 오른쪽 위 배너 (386x301) */
+.banner-2 {
+    width: 386px;
+    height: 301px;
+    position: relative;
+}
+
+/* 오른쪽 아래 배너 (386x253) */
+.banner-3 {
+    width: 386px;
+    height: 253px;
+    position: relative;
+}
+
+/* 이미지 공통 */
+.banner-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 텍스트 오버레이 스타일 (이미지 안의 글자들) */
+.banner-text-box {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    color: #000;
+}
+
+.banner-text-box .category {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.banner-text-box .main-h2 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 10px 0;
+}
+
+/* 폰트 및 텍스트 설정 */
+.banner-text-box .main-h2 {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    /* Regular */
+    font-size: 35px;
+    line-height: 1.2;
+    margin: 15px 0;
+    color: #000;
+}
+
+/* 구분선 스타일 */
+.title-line {
+    width: 30px;
+    border: none;
+    border-top: 3px solid #000;
+    margin-bottom: 5px;
+}
+
+/* 1. 모든 배너 박스의 공통 설정: 기준점(relative)과 커서 모양 */
+.banner-1,
+.banner-2,
+.banner-3 {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    /* 이미지가 밖으로 나가지 않게 */
+}
+
+/* 2. 오버레이 공통 스타일 (기본 상태: 숨김) */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* 어두운 배경 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+
+    /* 기본 상태: 숨김 */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    /* 부드러운 전환 */
+    z-index: 20;
+    /* 텍스트나 이미지보다 위로 */
+}
+
+/* 3. 호버 시 오버레이 나타나게 설정 (1, 2, 3번 모두 적용) */
+.banner-1:hover .overlay,
+.banner-2:hover .overlay,
+.banner-3:hover .overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 4. 오버레이 내부 텍스트 스타일 */
+.overlay span:first-child {
+    font-size: 40px;
+    /* + 기호 크기 */
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.overlay span:last-child {
+    font-size: 18px;
+    /* 더보기 글자 크기 */
+    letter-spacing: -0.5px;
+}
+
+/* ===== SECTION 2 ===== */
+
+.section_2_wrap {
+    width: 100%;
+    /* 1920px 고정보다는 100%가 반응형에 좋습니다 */
+    height: 900px;
+    background-color: #FCF6EF;
+
+    /* [핵심] 자식 요소인 slider를 상하좌우 정중앙으로 보냅니다 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* 영역 밖으로 나가는 슬라이드 깔끔하게 정리 */
+}
+
+.section_2_slider {
+    position: relative;
+    width: 100%;
+    max-width: 1544px;
+    /* (356px * 4) + (40px * 3) 계산값 */
+    margin: 0 auto;
+    /* 슬라이더 자체에 높이를 주지 않아도 flex center로 인해 중앙에 위치합니다 */
+}
+
+.section_2_mask {
+    width: 100%;
+    overflow: visible;
+    /* scale(1.08)이나 translateY가 잘리지 않도록 visible 권장 */
+}
+
+.section_2_view {
+    overflow: visible;
+}
+
+.section_2_track {
+    display: flex;
+    gap: 40px;
+    transition: transform 0.4s ease;
+}
+
+/* 타이틀 섹션 추가 */
+/* 2. 새로 만든 타이틀 스타일 */
+.slider_title .main-t {
+    position: absolute;
+    top: -140px;
+    /* 슬라이더 위쪽 여백에 맞게 조절 */
+    left: 0;
+    font-size: 40px;
+    font-weight: 800;
+    color: #000;
+    font-family: 'Pretendard', sans-serif;
+    /* 폰트는 프로젝트에 맞춰 변경 */
+}
+
+.slider_title .sub-t {
+    position: absolute;
+    top: -110px;
+    left: 220px;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* 개별 슬라이드 내부 텍스트 정렬 */
+.info_box {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.category {
+    display: inline-block;
+    font-size: 13px;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.info_box .category {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 50px;
+    height: 24px;
+    border: 2px solid #000;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+    color: #222;
+}
+
+/* 4. 이미지 박스 크기 고정 */
+.slide .img_box {
+    width: 356px;
+    height: 444px;
+    overflow: hidden;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.date {
+    font-size: 17px;
+    color: #222;
+}
+
+/* 슬라이드 호버 시 이미지와 텍스트가 함께 위로 슥 올라가는 효과 */
+.slide {
+    transition: all 0.5s ease-in-out;
+}
+
+.slide:hover {
+    transform: translateY(-30px);
+}
+
+/* 슬라이드 프레임 */
+.slide {
+    flex: 0 0 356px;
+    height: 444px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* transform 변화(이동+위아래)를 모두 부드럽게 처리 */
+    transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+/* 이미지 사이즈 고정 */
+.slide img {
+    width: 356px;
+    height: 444px;
+    object-fit: cover;
+    display: block;
+}
+
+.slide.up {
+    /* 기존 위치에서 위로 80px 이동 */
+    transform: translateY(-80px);
+}
+
+/* active(확대)를 같이 쓰고 싶다면 */
+.slide.active {
+    transform: translateY(-80px) scale(1.08);
+}
+
+/* 버튼 위치 조정 */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.slider-btn.prev {
+    left: -70px;
+}
+
+.slider-btn.next {
+    right: -70px;
+}
+
+/*------------- Section 3 전체 배경 및 패딩---------- */
+.section_3 {
+    width: 100%;
+    padding: 100px 0;
+    background: #1a1a1a;
+    /* 어두운 배경색 */
+    display: flex;
+    justify-content: center;
+}
+
+.section_3_inner {
+    width: 1328px;
+}
+
+/* 공통 타이틀 (화이트 버전) */
+.section_title.white .main-t {
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.section_title.white .sub-t {
+    font-size: 20px;
+    color: #ccc;
+}
+
+/* Guide Grid 설정 */
+.guide_container {
+    margin-bottom: 80px;
+}
+
+.guide_grid {
+    display: flex;
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.guide_item {
+    flex: 1;
+    height: 300px;
+    /* 박스 높이 (필요에 따라 조절) */
+    background: #333;
+    position: relative;
+    /* 자식 요소 배치의 기준점 */
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+/* 아이콘 박스 설정 (위에서 22px, 오른쪽에서 22px 고정) */
+.guide_item .icon_box {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+
+    /* 아이콘 크기 확대 (기존보다 살짝 키움) */
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.guide_item .icon_box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    /* 아이콘 색상을 하얀색으로 변경하는 필터 */
+    /* 검은색 아이콘일 경우 밝기를 0에서 100으로 올려서 흰색으로 만듭니다 */
+    filter: brightness(0) invert(1);
+}
+
+/* 글자 설정 (밑에서 22px, 왼쪽에서 22px 고정) */
+.guide_item p {
+    position: absolute;
+    bottom: 22px;
+    left: 22px;
+    font-size: 24px;
+    color: #fff;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* News 스타일 */
+.news_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #444;
+    
+}
+
+.news_header .more_btn {
+    margin-bottom: 15px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.news_list {
+    list-style: none;
+}
+
+.news_list li {
+    border-bottom: 1px solid #333;
+}
+
+.news_list li a {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px;
+    text-decoration: none;
+    color: #eee;
+    transition: color 0.3s;
+}
+
+.news_list li a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.news_subject {
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.news_date {
+    color: #888;
+    font-size: 15px;
+}
+
+/* Section 4 기본 설정 */
+.section_4 {
+    width: 100%;
+    max-width: 1920px;
+    height: 800px;
+    background: #f2e8d9;
+    /* 아카이브 배경색 */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.section_4_inner {
+    width: 1328px;
+    position: relative;
+}
+
+/* 타이틀부 */
+.section_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.section_header .main-t {
+    font-size: 40px;
+    font-weight: 800;
+    margin-right: 15px;
+}
+
+.section_header .sub-t {
+    font-size: 20px;
+    color: #333;
+}
+
+.section_header .more_btn {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+/* 슬라이더 핵심 로직 */
+.archive-slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.archive-view-window {
+    width: 100%;
+    overflow: hidden;
+}
+
+.archive-track {
+    display: flex;
+    gap: 30px;
+    /* 카드 사이 간격 */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 카드 디자인 */
+.archive-card {
+    flex: 0 0 calc((100% - 60px) / 3);
+    /* 3장 노출 계산 */
+    cursor: pointer;
+}
+
+.archive-card .thumb {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.archive-card .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s;
+}
+
+.archive-card:hover .thumb img {
+    transform: scale(1.08);
+}
+
+.archive-card .info h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    color: #000;
+}
+
+.archive-card .info .loc {
+    font-size: 15px;
+    color: #222;
+    margin-bottom: 6px;
+}
+
+.archive-card .info .date {
+    font-size: 16px;
+    color: #222;
+}
+
+/* 슬라이드 화살표 버튼 */
+.slide-btn {
+    position: absolute;
+    top: 160px;
+    /* 썸네일 중앙 높이 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.prev-btn {
+    left: -70px;
+}
+
+.next-btn {
+    right: -70px;
+}
+
+/* TOP 버튼 (우측 하단) */
+.top_btn {
+    position: fixed;
+    /* 또는 부모 relative 기준 absolute */
+    right: 50px;
+    bottom: 50px;
+
+    /* 배경 및 테두리 초기화 */
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    /* 애니메이션 속도 */
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.top_btn img {
+    width: 40px;
+    /* 아이콘 크기 조절 */
+    height: auto;
+    display: block;
+    /* 기본 불투명도 조절 (선택 사항) */
+    opacity: 0.7;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ===== Hover 기능 추가 ===== */
+
+.top_btn:hover img {
+    /* 1. 위로 살짝 움직이는 효과 */
+    transform: translateY(-5px);
+
+    /* 2. 더 선명해지는 효과 */
+    opacity: 1;
+
+    /* 3. 색상 변화 (이미지가 흑백일 경우 필터로 색 제어 가능) */
+    /* filter: brightness(0) saturate(100%) invert(30%) sepia(100%) ... ; */
+}
+
+/* 추가: 클릭했을 때 살짝 눌리는 느낌 */
+.top_btn:active {
+    transform: scale(0.9);
+}
+
+.footer {
+    width: 100%;
+    max-width: 1920px;
+    background: #f2e8d9;
+    padding: 60px 0 80px 0;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* 진한 상단 라인 */
+.footer-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: #222;
+    opacity: 0.8;
+}
+
+/* 전체 푸터 내부 정렬 */
+.footer_inner {
+    width: 1328px;
+    margin: 0 auto;
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* 왼쪽의 주소 정보와 오른쪽 로고 정보의 바닥 라인을 맞춤 */
+}
+
+/* SNS 단일 이미지 스타일 */
+/* SNS 이미지 크기 및 스타일 */
+.footer_sns_single img {
+    width: 160px;
+    height: 45px;
+    /* 로고 크기에 맞춰 적절히 조절 */
+    width: auto;
+    display: block;
+}
+
+.footer_sns_single img:hover {
+    opacity: 1;
+}
+
+/* 오른쪽 구역 설정 */
+.footer_right {
+    display: flex;
+    flex-direction: row;
+    /* 가로로 나열 */
+    align-items: flex-end;
+    /* 하단 수평(바닥) 라인에 맞춤 */
+    gap: 30px;
+    /* SNS와 로고 사이의 간격 */
+    padding-bottom: 5px;
+    /* 주소 라인과 높이를 맞추기 위한 미세 조정 */
+}
+
+/* 왼쪽 메뉴 및 버튼 스타일 (기존 유지) */
+.footer_left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer_menu {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+}
+
+.footer_menu li a {
+    display: block;
+    padding: 6px 15px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #333;
+    text-decoration: none;
+}
+
+.sel_box {
+    padding: 8px 12px;
+    border: 1px solid #333;
+    background: transparent;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+#main-left .horizontal {
+    display: flex;
+    flex: 0 0 auto;
+    /* 트랙 자체도 줄어들지 않게 */
+}
+
+#main-left .horizontal img {
+    width: 978px;
+    height: 651px;
+    flex: 0 0 978px;
+    /* ✅ 핵심: 절대 shrink 금지 + 폭 고정 */
+    display: block;
+    object-fit: cover;
+    /* ✅ none 쓰면 이상하게 보일 수 있음 */
+}
+
+#main-left.box.left,
+#main-right.box.right {
+    justify-content: flex-start;
+}
+
+body {
+    overflow-x: hidden;
+}
+
