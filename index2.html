@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수원시립미술관</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #wrap {
+            width: 1920px;
+            margin: 0 auto;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        /* ===== HEADER ===== */
+
+        header {
+            width: 1920px;
+            height: 900px;
+            padding-top: 139px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 상단 고정 영역 */
+        #header-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            width: 1920px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 120px;
+            /* 로고 ↔ 메뉴 ↔ 아이콘 간격 */
+        }
+
+        /* ===== MENU ===== */
+
+        .menu {
+            width: 589px;
+            position: relative;
+        }
+
+        .menu>ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .menu>ul>li {
+            position: relative;
+            font-size: 16px;
+            padding-bottom: 6px;
+        }
+
+        .menu>ul>li>a {
+            display: block;
+            padding: 4px 0;
+            opacity: 0.6;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .menu>ul>li:hover>a {
+            opacity: 1;
+            color: #db9a9a;
+        }
+
+        /* 메뉴 hover 시 서브메뉴 열기 */
+        .menu>ul>li:hover .submenu {
+            height: auto;
+            padding: 10px 0;
+        }
+
+        /* underline */
+        .menu-underline {
+            position: absolute;
+            left: 50%;
+            bottom: -3px;
+            width: 0;
+            height: 2px;
+            background-color: #db9a9a;
+            opacity: 0;
+            transform: translateX(-50%);
+            transition: width 0.3s ease, opacity 0.3s ease;
+        }
+
+        .menu>ul>li:hover .menu-underline {
+            width: 100%;
+            opacity: 1;
+        }
+
+        /* submenu */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+            background-color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.4s ease;
+            z-index: 1100;
+        }
+
+        .submenu li a {
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .submenu li a:hover {
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+
+        /* 아이콘 */
+        .menu-icon {
+            flex-shrink: 0;
+        }
+
+        .menu-icon img {
+            margin-left: 20px;
+        }
+
+        
+        .subpage .sub_img1{
+            width: 1920px;
+            height: 1314px;
+        }
+        .subpage .sub_img2{
+            width: 1920px;
+            height: 1205px;
+        }
+
+        .subpage .sub_img2{
+            width: 1920px;
+            height: 771px;
+        }
+
+        body {
+    overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <header>
+            <div id="header-top">
+                <div class="header-inner">
+
+                    <h1>
+                        <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+                    </h1>
+
+                    <nav class="menu">
+                        <ul>
+                            <li>
+                                <a href="index.html"><strong>관람</strong></a>
+                                <span class="menu-underline"></span>
+                                <ul class="submenu">
+                                    <li><a href="#">관람안내</a></li>
+                                    <li><a href="#">단체관람예약</a></li>
+                                    <li><a href="#">대관안내</a></li>
+                                    <li><a href="#">멤버십안내</a></li>
+                                    <li><a href="#">오시는길</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="index.html"><strong>교육</strong></a>
+                                <span class="menu-underline"></span>
+                                <ul class="submenu">
+                                    <li><a href="#">교육소개</a></li>
+                                    <li><a href="#">교육자료실</a></li>
+                                    <li><a href="#">참여신청</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="index.html"><strong>라이브러리·소장품</strong></a>
+                                <span class="menu-underline"></span>
+                                <ul class="submenu">
+                                    <li><a href="#">라이브러리</a></li>
+                                    <li><a href="#">아카이브</a></li>
+                                    <li><a href="#">소장품</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="index.html"><strong>소식·홍보</strong></a>
+                                <span class="menu-underline"></span>
+                                <ul class="submenu">
+                                    <li><a href="#">새소식</a></li>
+                                    <li><a href="#">보도자료</a></li>
+                                    <li><a href="#">뉴스레터</a></li>
+                                    <li><a href="#">자주묻는질문</a></li>
+                                    <li><a href="#">설문조사</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="index.html"><strong>미술관소식</strong></a>
+                                <span class="menu-underline"></span>
+                                <ul class="submenu">
+                                    <li><a href="#">미술관소개</a></li>
+                                    <li><a href="#">행궁본관</a></li>
+                                    <li><a href="#">만석전시관</a></li>
+                                    <li><a href="#">아트스페이스광교</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="menu-icon">
+                        <img src="images/header_icon.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="subpage">
+                <div class="sub_img1">
+                    <img src="images/subimg1.png" alt="">
+                </div>
+                <div class="sub_img2">
+                    <img src="images/subimg2.png" alt="">
+                </div>
+                <div class="sub_img3">
+                    <img src="images/subimg3.png" alt="">
+                </div>
+            </div>
+</body>
+
+</html>
